@@ -1,0 +1,19 @@
+language: csharp
+mono: none
+group: dev
+sudo: required
+dist: xenial
+dotnet: 2.1
+script:
+  - dotnet restore TestGpuProgram.csproj
+  - dotnet build TestGpuProgram.csproj
+
+deploy:
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: "*.dll"
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: "$TRAVIS_OS_NAME == linux"
