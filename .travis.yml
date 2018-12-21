@@ -12,7 +12,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     file_glob: true
-    file: "*.dll"
+    file: "bin/**/*"
     skip_cleanup: true
     on:
       branch: master
