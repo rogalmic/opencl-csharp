@@ -1,6 +1,6 @@
 # opencl-csharp
 
-Prime calculation example using extension method for array (ClooExtensions.cs).
+Prime calculation example using extension method for array (ClooExtensions.cs). Published to native binary via [CoreRT](https://github.com/dotnet/corert) - see `tasks.json`.
 
 C#:
 ```cs
@@ -30,7 +30,8 @@ kernel void GetIfPrime(global int* message)
 
 Requirements:
 - newest `VSCode` with C#/Omnisharp extension **OR** newest `Visual Studio 2017`
-- .NET Core 2.1 SDK installed ( cmd: `dotnet --info` )
+- .NET Core 3.0 SDK installed ( cmd: `dotnet --info` )
+- Windows 10 SDK + Visual studio build tools for c++
 - GPU driver [with OpenCL support](https://www.khronos.org/conformance/adopters/conformant-products#opencl)
 - for linux/macos create `Cloo.dll.config`:
 ```xml

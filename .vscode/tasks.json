@@ -9,6 +9,22 @@
                 "build",
                 "${workspaceFolder}/TestGpuProgram.csproj"
             ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            // requires VS2017 C++ tools installed
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-r",
+                "win-x64",
+                "-c",
+                "Release",
+                "${workspaceFolder}/TestGpuProgram.csproj"
+            ],
             "problemMatcher": "$msCompile"
         }
     ]
