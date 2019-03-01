@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Cloo.Extensions;
 
 namespace TestGpuProg
 {
@@ -9,7 +10,7 @@ namespace TestGpuProg
         {
             int[] primes = Enumerable.Range(2, 1000000).ToArray();
 
-            primes.OpenCLForEach(IsPrime);
+            primes.ClooForEach(IsPrime);
 
             Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Where(n => n != 0).Take(100)));
             Console.ReadKey();

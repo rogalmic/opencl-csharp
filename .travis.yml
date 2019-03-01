@@ -3,7 +3,7 @@ mono: none
 group: dev
 sudo: required
 dist: xenial
-dotnet: 2.1
+dotnet: 3.0
 script:
   - dotnet restore TestGpuProgram.csproj
   - dotnet build TestGpuProgram.csproj
