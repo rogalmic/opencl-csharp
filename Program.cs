@@ -12,7 +12,7 @@ namespace TestGpuProg
 
             primes.ClooForEach(IsPrime);
 
-            Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Where(n => n != 0).Take(100)));
+            Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Take(100)));
             Console.ReadKey();
         }
 

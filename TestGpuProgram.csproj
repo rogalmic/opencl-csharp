@@ -4,12 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>0.0.1.0</Version>    
+    <Version>0.0.1.1</Version>    
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Cloo.clSharp" Version="1.*" />
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-*" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-*" />
   </ItemGroup>
 
 </Project> 
