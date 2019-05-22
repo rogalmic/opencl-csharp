@@ -3,11 +3,15 @@ mono: none
 group: dev
 sudo: required
 dist: xenial
-dotnet: 3.0
+addons:
+  snaps:
+  - name: dotnet-sdk
+    classic: true
+    channel: latest/beta
 script:
-  - dotnet restore TestGpuProgram.csproj
+  - sudo snap alias dotnet-sdk.dotnet dotnet
+  - dotnet --version
   - dotnet build TestGpuProgram.csproj
-
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
