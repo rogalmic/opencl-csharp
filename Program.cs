@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Cloo.Extensions;
 
@@ -8,11 +9,39 @@ namespace TestGpuProg
     {
         static void Main(string[] args)
         {
-            int[] primes = Enumerable.Range(2, 1000000).ToArray();
+            Console.ForegroundColor = ConsoleColor.White;
+            var devices = ClooExtensions.GetDeviceNames();
+            
+            foreach (var dev in devices)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(dev.Trim());
+                Console.ForegroundColor = ConsoleColor.Gray;
+                int[] primes = Enumerable.Range(2, 1000000).ToArray();
 
-            primes.ClooForEach(IsPrime);
+                var sw = new Stopwatch();
+                try
+                {
+                    sw.Start();
+                    primes.ClooForEach(IsPrime, k => true, (i, d, v) => d == dev);
+                    Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Take(100)) + ", ...");
+                }
+                catch (Exception ex)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+                finally
+                {
+                    sw.Stop();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"Time: {sw.ElapsedMilliseconds}ms");
+                }
 
-            Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Take(100)));
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Press enter to quit...");
             Console.ReadKey();
         }
 
