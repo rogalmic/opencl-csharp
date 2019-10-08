@@ -9,14 +9,12 @@ namespace TestGpuProg
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.White;
             var devices = ClooExtensions.GetDeviceNames();
-            
-            foreach (var dev in devices)
+
+            foreach (var dev in devices.Where(d => args.Length == 0 || args.Contains(d.Trim())))
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(dev.Trim());
-                Console.ForegroundColor = ConsoleColor.Gray;
+                WriteLine(dev.Trim(), ConsoleColor.Yellow);
+
                 int[] primes = Enumerable.Range(2, 1000000).ToArray();
 
                 var sw = new Stopwatch();
@@ -24,25 +22,22 @@ namespace TestGpuProg
                 {
                     sw.Start();
                     primes.ClooForEach(IsPrime, k => true, (i, d, v) => d == dev);
-                    Console.WriteLine(string.Join(", ", primes.Where(n => n != 0).Take(100)) + ", ...");
+                    WriteLine($"{string.Join(", ", primes.Where(n => n != 0).Take(100))}, ...", ConsoleColor.Gray);
                 }
                 catch (Exception ex)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Error: {ex.Message}");
+                    WriteLine($"Error: {ex.Message}", ConsoleColor.Red);
                 }
                 finally
                 {
                     sw.Stop();
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"Time: {sw.ElapsedMilliseconds}ms");
+                    WriteLine($"Time: {sw.ElapsedMilliseconds}ms");
                 }
 
-                Console.WriteLine();
+                WriteLine();
             }
 
-            Console.WriteLine("Press enter to quit...");
-            Console.ReadKey();
+            WriteLine("Press enter to quit...", ConsoleColor.White, true);            
         }
 
         static string IsPrime
@@ -64,6 +59,17 @@ kernel void GetIfPrime(global int* message)
         }
     }
 }";
+            }
+        }
+
+        static void WriteLine(string text = "", ConsoleColor color = ConsoleColor.White, bool wait = false)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+
+            if (wait)
+            {
+                Console.ReadKey();
             }
         }
     }
