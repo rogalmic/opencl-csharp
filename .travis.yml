@@ -1,23 +1,21 @@
 language: csharp
 mono: none
+os: windows
 group: dev
-sudo: required
-dist: xenial
-addons:
-  snaps:
-  - name: dotnet-sdk
-    classic: true
-    channel: latest/beta
+env:
+  - MSBUILD_PATH: "'/c/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/MSBuild/15.0/Bin'"
+before_install:
+  - export PATH=$MSBUILD_PATH:${PATH}
 script:
-  - sudo snap alias dotnet-sdk.dotnet dotnet
+  - choco install dotnetcore-sdk
   - dotnet --version
   - dotnet build TestGpuProgram.csproj
+  - dotnet publish -r win-x64 -c Release TestGpuProgram.csproj
 deploy:
   - provider: releases
     api_key: $GITHUB_TOKEN
     file_glob: true
-    file: "bin/**/*"
+    file: "bin/**/*.exe"
     skip_cleanup: true
     on:
       branch: master
-      condition: "$TRAVIS_OS_NAME == linux"
