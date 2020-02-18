@@ -29,7 +29,7 @@ kernel void GetIfPrime(global int* message)
 ```
 
 Requirements:
-- newest `VSCode` with C#/Omnisharp extension **OR** newest `Visual Studio 2017`
+- newest `VSCode` with C#/Omnisharp extension **OR** newest `Visual Studio 2019`
 - .NET Core 3.1 SDK installed ( cmd: `dotnet --info` )
 - Windows 10 SDK + Visual studio build tools for c++
 - GPU driver [with OpenCL support](https://www.khronos.org/conformance/adopters/conformant-products#opencl)
@@ -42,4 +42,4 @@ Requirements:
 </configuration>
 ```
 
-The project targets .NET Core, but code files should work with .NET 4.7.2 as well (after installing `Cloo` nuget package).
+The project targets .NET Core, but code files should work with .NET 4.8 as well (after installing `Cloo` nuget package).

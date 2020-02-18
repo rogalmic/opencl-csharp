@@ -37,7 +37,7 @@ namespace TestGpuProg
                 WriteLine();
             }
 
-            WriteLine("Press enter to quit...", ConsoleColor.White, true);            
+            WriteLine("Press enter to quit...", ConsoleColor.White, true);
         }
 
         static string IsPrime
